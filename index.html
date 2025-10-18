@@ -17,7 +17,7 @@ body, html {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: #00ff7f; /* green tech glow */
+    color: #00ffe1; /* neon accent */
 }
 
 /* Particle background */
@@ -33,15 +33,15 @@ canvas#bg {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    border: 4px solid #00ff7f;
-    box-shadow: 0 0 20px #00ff7f, 0 0 40px #00ff7f;
+    border: 4px solid #00ffe1;
+    box-shadow: 0 0 20px #00ffe1, 0 0 40px #00ffe1;
     object-fit: cover;
     animation: pulse 2.5s infinite alternate;
     margin-bottom: 25px;
 }
 @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 20px #00ff7f, 0 0 40px #00ff7f; }
-    100% { transform: scale(1.05); box-shadow: 0 0 40px #00ff7f, 0 0 80px #00ff7f; }
+    0% { transform: scale(1); box-shadow: 0 0 20px #00ffe1, 0 0 40px #00ffe1; }
+    100% { transform: scale(1.05); box-shadow: 0 0 40px #00ffe1, 0 0 80px #00ffe1; }
 }
 
 /* Intro text */
@@ -59,33 +59,31 @@ h2 {
     font-size: 1.2em;
     min-height: 4em;
     line-height: 1.4em;
-    color: #00ff7f;
+    color: #00ffe1;
 }
 
 /* Typewriter effect */
 .typewriter-line {
-    display: inline-block;
-    overflow: hidden;
+    display: block;
     white-space: nowrap;
-    border-right: 2px solid #00ff7f;
-    width: 0;
 }
 
 /* Buttons */
 a {
     display: block;
     margin: 15px;
-    padding: 18px 40px;
+    padding: 18px 60px; /* longer button */
     text-decoration: none;
     color: #fff;
     font-weight: bold;
     font-size: 1.2em;
-    border-radius: 12px;
+    border-radius: 30px; /* rounded rectangle */
     text-align: center;
     transition: 0.3s;
     opacity: 0;
     animation: fadeIn 2s forwards;
-    box-shadow: 0 0 5px #00ff7f, 0 0 10px #00ff7f;
+    background-color: #444; /* single neutral color */
+    box-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1; /* subtle neon glow */
 }
 
 a:nth-of-type(1) { animation-delay: 2.5s; }
@@ -93,13 +91,8 @@ a:nth-of-type(2) { animation-delay: 3s; }
 a:nth-of-type(3) { animation-delay: 3.5s; }
 a:nth-of-type(4) { animation-delay: 4s; }
 
-a.linkedin { background-color: #0077B5; }
-a.twitter { background-color: #1DA1F2; }
-a.github { background-color: #333; }
-a.medium { background-color: #00ab6c; }
-
 a:hover {
-    box-shadow: 0 0 25px #00ff7f, 0 0 50px #00ff7f;
+    box-shadow: 0 0 20px #00ffe1, 0 0 40px #00ffe1;
     transform: translateY(-5px);
 }
 
@@ -112,7 +105,7 @@ a:hover {
 @media(max-width: 480px){
     h1 { font-size: 2em; }
     h2 { font-size: 1em; }
-    a { font-size: 1em; padding: 15px 30px; }
+    a { font-size: 1em; padding: 15px 45px; }
     .profile-pic { width: 150px; height: 150px; }
 }
 </style>
@@ -125,18 +118,18 @@ a:hover {
 <!-- Intro text -->
 <h1>Hi, I'm Maureen</h1>
 <h2>
-    <span class="typewriter-line" id="line1"></span><br>
-    <span class="typewriter-line" id="line2"></span><br>
+    <span class="typewriter-line" id="line1"></span>
+    <span class="typewriter-line" id="line2"></span>
     <span class="typewriter-line" id="line3"></span>
 </h2>
 
 <!-- Social links -->
-<a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" class="linkedin" target="_blank">LinkedIn</a>
-<a href="https://x.com/babywick15?s=21" class="twitter" target="_blank">Twitter</a>
-<a href="https://github.com/mauree155" class="github" target="_blank">GitHub</a>
-<a href="https://medium.com/@okoromaureen590" class="medium" target="_blank">Medium</a>
+<a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" target="_blank">LinkedIn</a>
+<a href="https://x.com/babywick15?s=21" target="_blank">Twitter</a>
+<a href="https://github.com/mauree155" target="_blank">GitHub</a>
+<a href="https://medium.com/@okoromaureen590" target="_blank">Medium</a>
 
-<!-- Particle background script -->
+<!-- Particle background -->
 <canvas id="bg"></canvas>
 <script>
 const canvas = document.getElementById('bg');
@@ -166,29 +159,28 @@ function animate(){
         if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle = '#00ff7f';
+        ctx.fillStyle = '#00ffe1';
         ctx.fill();
     });
     requestAnimationFrame(animate);
 }
 animate();
-
 window.addEventListener('resize', ()=>{
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
 
-// Typewriter effect
+// Typewriter effect for multi-line
 const lines = [
     "I craft intelligent, deployable solutions",
     "from complex data to power better",
     "business outcomes"
 ];
 
-function typeLine(lineElem, text, delay = 0, callback) {
+function typeLine(lineElem, text, delay = 0, callback){
     let i = 0;
-    setTimeout(() => {
-        const interval = setInterval(() => {
+    setTimeout(()=>{
+        const interval = setInterval(()=>{
             lineElem.textContent += text[i];
             i++;
             if(i >= text.length){
