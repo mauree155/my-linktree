@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maureen Okoro Links</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+        body {
+            background-color: #000000;
+            color: #00ffe1;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00ffe1;
+            text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1;
+        }
+
+        a {
+            display: block;
+            margin: 15px;
+            padding: 18px 40px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2em;
+            border-radius: 12px;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 0 5px #00ffe1, 0 0 10px #00ffe1;
+        }
+
+        a.linkedin { background-color: #0077B5; }
+        a.twitter { background-color: #1DA1F2; }
+        a.github { background-color: #333; }
+        a.medium { background-color: #00ab6c; }
+
+        a:hover {
+            box-shadow: 0 0 20px #00ffe1, 0 0 40px #00ffe1;
+            transform: translateY(-5px);
+        }
+
+        /* Optional futuristic glowing underline effect */
+        a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 0;
+            background: #00ffe1;
+            transition: width 0.3s;
+            margin-top: 6px;
+            border-radius: 1px;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive adjustments */
+        @media(max-width: 480px){
+            h1 { font-size: 2em; }
+            a { font-size: 1em; padding: 15px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hi, I'm Maureen</h1>
+    <a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" class="linkedin" target="_blank">LinkedIn</a>
+    <a href="https://x.com/babywick15?s=21" class="twitter" target="_blank">Twitter</a>
+    <a href="https://github.com/mauree155" class="github" target="_blank">GitHub</a>
+    <a href="https://medium.com/@okoromaureen590" class="medium" target="_blank">Medium</a>
+</body>
+</html>
