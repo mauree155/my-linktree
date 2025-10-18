@@ -12,21 +12,12 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: 'Orbitron', sans-serif;
-    background: #000;
-    overflow: hidden;
+    background: #0d0d0d;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: #00ffe1;
-}
-
-/* --- Particle background --- */
-canvas#bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+    color: #fff;
 }
 
 /* --- Profile picture --- */
@@ -34,72 +25,92 @@ canvas#bg {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    border: 4px solid #00ffe1;
-    box-shadow: 0 0 20px #00ffe1, 0 0 40px #00ffe1;
+    border: 3px solid #00cfff;
+    box-shadow: 0 0 15px rgba(0, 207, 255, 0.3);
     object-fit: cover;
-    animation: pulse 2.5s infinite alternate;
     margin-bottom: 25px;
+    transition: transform 0.5s ease;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 20px #00ffe1, 0 0 40px #00ffe1; }
-    100% { transform: scale(1.05); box-shadow: 0 0 40px #00ffe1, 0 0 80px #00ffe1; }
+.profile-pic:hover {
+    transform: scale(1.05);
 }
 
 /* --- Intro text --- */
-h1, h2 {
+h1 {
     margin: 5px 0;
     text-align: center;
-    text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1;
+    font-weight: 400;
     opacity: 0;
-    animation: fadeIn 2s forwards;
+    animation: fadeIn 1s forwards;
+    animation-delay: 0.5s;
+    font-size: 2.2em;
 }
 
-h1 { font-size: 2.5em; animation-delay: 0.5s; }
-h2 { font-size: 1.2em; font-weight: 400; animation-delay: 1.5s; }
+h2 {
+    margin: 5px 0;
+    text-align: center;
+    font-weight: 300;
+    color: #b0b0b0;
+    font-size: 1.1em;
+    min-height: 1.2em; /* prevents jump during typing */
+}
 
-@keyframes fadeIn {
-    to { opacity: 1; }
+/* --- Typewriter effect --- */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+@keyframes blinkCaret {
+    50% { border-color: transparent; }
+}
+
+.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #00cfff;
+    animation: typing 4s steps(80, end), blinkCaret 0.75s step-end infinite;
 }
 
 /* --- Buttons --- */
 a {
     display: block;
     margin: 15px;
-    padding: 18px 40px;
+    padding: 15px 35px;
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-    font-size: 1.2em;
-    border-radius: 12px;
+    font-size: 1.1em;
+    border-radius: 10px;
     text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 0 5px #00ffe1, 0 0 10px #00ffe1;
+    transition: 0.3s ease;
     opacity: 0;
-    animation: fadeIn 2s forwards;
+    animation: fadeIn 1s forwards;
+    background: linear-gradient(135deg, #00cfff, #006eff);
+    box-shadow: 0 4px 10px rgba(0, 207, 255, 0.3);
 }
 
-a:nth-of-type(1) { animation-delay: 2.5s; }
-a:nth-of-type(2) { animation-delay: 3s; }
-a:nth-of-type(3) { animation-delay: 3.5s; }
-a:nth-of-type(4) { animation-delay: 4s; }
-
-a.linkedin { background-color: #0077B5; }
-a.twitter { background-color: #1DA1F2; }
-a.github { background-color: #333; }
-a.medium { background-color: #00ab6c; }
+a:nth-of-type(1) { animation-delay: 1.5s; }
+a:nth-of-type(2) { animation-delay: 2s; }
+a:nth-of-type(3) { animation-delay: 2.5s; }
+a:nth-of-type(4) { animation-delay: 3s; }
 
 a:hover {
-    box-shadow: 0 0 25px #00ffe1, 0 0 50px #00ffe1;
     transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 207, 255, 0.5);
+}
+
+/* --- Fade-in animation --- */
+@keyframes fadeIn {
+    to { opacity: 1; }
 }
 
 /* --- Responsive --- */
 @media(max-width: 480px){
-    h1 { font-size: 2em; }
-    h2 { font-size: 1em; }
-    a { font-size: 1em; padding: 15px 30px; }
-    .profile-pic { width: 150px; height: 150px; }
+    h1 { font-size: 1.8em; }
+    a { font-size: 1em; padding: 12px 25px; }
+    .profile-pic { width: 140px; height: 140px; }
 }
 </style>
 </head>
@@ -110,61 +121,13 @@ a:hover {
 
 <!-- Intro text -->
 <h1>Hi, I'm Maureen</h1>
-<h2>I craft intelligent, deployable solutions from complex data to power better business outcomes</h2>
+<h2><span class="typewriter">I craft intelligent, deployable solutions from complex data to power better business outcomes</span></h2>
 
 <!-- Social links -->
-<a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" class="linkedin" target="_blank">LinkedIn</a>
-<a href="https://x.com/babywick15?s=21" class="twitter" target="_blank">Twitter</a>
-<a href="https://github.com/mauree155" class="github" target="_blank">GitHub</a>
-<a href="https://medium.com/@okoromaureen590" class="medium" target="_blank">Medium</a>
-
-<!-- Particle background script -->
-<canvas id="bg"></canvas>
-<script>
-const canvas = document.getElementById('bg');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = [];
-const particleCount = 100;
-
-for(let i=0;i<particleCount;i++){
-    particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*2+1,
-        dx: (Math.random()-0.5)*0.5,
-        dy: (Math.random()-0.5)*0.5
-    });
-}
-
-function animate(){
-    ctx.fillStyle = 'rgba(0,0,0,0.1)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    particles.forEach(p=>{
-        p.x += p.dx;
-        p.y += p.dy;
-
-        if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle = '#00ffe1';
-        ctx.fill();
-    });
-
-    requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener('resize', ()=>{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-</script>
+<a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" target="_blank">LinkedIn</a>
+<a href="https://x.com/babywick15?s=21" target="_blank">Twitter</a>
+<a href="https://github.com/mauree155" target="_blank">GitHub</a>
+<a href="https://medium.com/@okoromaureen590" target="_blank">Medium</a>
 
 </body>
 </html>
