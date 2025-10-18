@@ -4,19 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maureen Okoro Links</title>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Fira Code', monospace;
-    background: #0d0d0d;
+    font-family: 'Orbitron', sans-serif;
+    background: #000;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: #00ff7f;
+    color: #00ff7f; /* green tech glow */
+}
+
+/* Particle background */
+canvas#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 /* Profile picture */
@@ -24,34 +33,33 @@ body, html {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    border: 3px solid #00ff7f;
-    box-shadow: 0 0 15px rgba(0,255,127,0.3);
+    border: 4px solid #00ff7f;
+    box-shadow: 0 0 20px #00ff7f, 0 0 40px #00ff7f;
     object-fit: cover;
+    animation: pulse 2.5s infinite alternate;
     margin-bottom: 25px;
-    transition: transform 0.5s ease;
 }
-.profile-pic:hover {
-    transform: scale(1.05);
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 20px #00ff7f, 0 0 40px #00ff7f; }
+    100% { transform: scale(1.05); box-shadow: 0 0 40px #00ff7f, 0 0 80px #00ff7f; }
 }
 
-/* Intro */
+/* Intro text */
 h1 {
     margin: 5px 0;
     text-align: center;
-    font-weight: 400;
-    font-size: 2.2em;
+    font-size: 2.5em;
     opacity: 0;
-    animation: fadeIn 1s forwards;
+    animation: fadeIn 2s forwards;
     animation-delay: 0.5s;
 }
 h2 {
     margin: 10px 0;
     text-align: center;
-    font-weight: 400;
     font-size: 1.2em;
     min-height: 4em;
-    color: #00ff7f;
     line-height: 1.4em;
+    color: #00ff7f;
 }
 
 /* Typewriter effect */
@@ -67,28 +75,32 @@ h2 {
 a {
     display: block;
     margin: 15px;
-    padding: 15px 35px;
+    padding: 18px 40px;
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-    font-size: 1.1em;
-    border-radius: 10px;
+    font-size: 1.2em;
+    border-radius: 12px;
     text-align: center;
-    transition: 0.3s ease;
+    transition: 0.3s;
     opacity: 0;
-    animation: fadeIn 1s forwards;
-    background: linear-gradient(135deg, #00ff7f, #009933);
-    box-shadow: 0 4px 10px rgba(0,255,127,0.3);
+    animation: fadeIn 2s forwards;
+    box-shadow: 0 0 5px #00ff7f, 0 0 10px #00ff7f;
 }
 
-a:nth-of-type(1) { animation-delay: 1.5s; }
-a:nth-of-type(2) { animation-delay: 2s; }
-a:nth-of-type(3) { animation-delay: 2.5s; }
-a:nth-of-type(4) { animation-delay: 3s; }
+a:nth-of-type(1) { animation-delay: 2.5s; }
+a:nth-of-type(2) { animation-delay: 3s; }
+a:nth-of-type(3) { animation-delay: 3.5s; }
+a:nth-of-type(4) { animation-delay: 4s; }
+
+a.linkedin { background-color: #0077B5; }
+a.twitter { background-color: #1DA1F2; }
+a.github { background-color: #333; }
+a.medium { background-color: #00ab6c; }
 
 a:hover {
+    box-shadow: 0 0 25px #00ff7f, 0 0 50px #00ff7f;
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,255,127,0.5);
 }
 
 /* Fade in animation */
@@ -98,17 +110,19 @@ a:hover {
 
 /* Responsive */
 @media(max-width: 480px){
-    h1 { font-size: 1.8em; }
+    h1 { font-size: 2em; }
     h2 { font-size: 1em; }
-    a { font-size: 1em; padding: 12px 25px; }
-    .profile-pic { width: 140px; height: 140px; }
+    a { font-size: 1em; padding: 15px 30px; }
+    .profile-pic { width: 150px; height: 150px; }
 }
 </style>
 </head>
 <body>
 
+<!-- Profile picture -->
 <img src="profile.jpg" alt="Maureen Okoro" class="profile-pic">
 
+<!-- Intro text -->
 <h1>Hi, I'm Maureen</h1>
 <h2>
     <span class="typewriter-line" id="line1"></span><br>
@@ -116,13 +130,55 @@ a:hover {
     <span class="typewriter-line" id="line3"></span>
 </h2>
 
-<a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" target="_blank">LinkedIn</a>
-<a href="https://x.com/babywick15?s=21" target="_blank">Twitter</a>
-<a href="https://github.com/mauree155" target="_blank">GitHub</a>
-<a href="https://medium.com/@okoromaureen590" target="_blank">Medium</a>
+<!-- Social links -->
+<a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" class="linkedin" target="_blank">LinkedIn</a>
+<a href="https://x.com/babywick15?s=21" class="twitter" target="_blank">Twitter</a>
+<a href="https://github.com/mauree155" class="github" target="_blank">GitHub</a>
+<a href="https://medium.com/@okoromaureen590" class="medium" target="_blank">Medium</a>
 
+<!-- Particle background script -->
+<canvas id="bg"></canvas>
 <script>
-// Multi-line typewriter effect
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+const particleCount = 100;
+for(let i=0;i<particleCount;i++){
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2+1,
+        dx: (Math.random()-0.5)*0.5,
+        dy: (Math.random()-0.5)*0.5
+    });
+}
+
+function animate(){
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+        p.x += p.dx;
+        p.y += p.dy;
+        if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = '#00ff7f';
+        ctx.fill();
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener('resize', ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// Typewriter effect
 const lines = [
     "I craft intelligent, deployable solutions",
     "from complex data to power better",
@@ -135,9 +191,9 @@ function typeLine(lineElem, text, delay = 0, callback) {
         const interval = setInterval(() => {
             lineElem.textContent += text[i];
             i++;
-            if (i >= text.length) {
+            if(i >= text.length){
                 clearInterval(interval);
-                if (callback) callback();
+                if(callback) callback();
             }
         }, 50);
     }, delay);
@@ -149,12 +205,11 @@ const lineElems = [
     document.getElementById("line3")
 ];
 
-typeLine(lineElems[0], lines[0], 500, () => {
-    typeLine(lineElems[1], lines[1], 300, () => {
+typeLine(lineElems[0], lines[0], 1000, ()=>{
+    typeLine(lineElems[1], lines[1], 300, ()=>{
         typeLine(lineElems[2], lines[2], 300);
     });
 });
 </script>
-
 </body>
 </html>
