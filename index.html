@@ -4,76 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maureen Okoro Links</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* --- Reset & Body --- */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Fira Code', monospace;
     background: #0d0d0d;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: #fff;
+    color: #00ff7f;
 }
 
-/* --- Profile picture --- */
+/* Profile picture */
 .profile-pic {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    border: 3px solid #00cfff;
-    box-shadow: 0 0 15px rgba(0, 207, 255, 0.3);
+    border: 3px solid #00ff7f;
+    box-shadow: 0 0 15px rgba(0,255,127,0.3);
     object-fit: cover;
     margin-bottom: 25px;
     transition: transform 0.5s ease;
 }
-
 .profile-pic:hover {
     transform: scale(1.05);
 }
 
-/* --- Intro text --- */
+/* Intro */
 h1 {
     margin: 5px 0;
     text-align: center;
     font-weight: 400;
+    font-size: 2.2em;
     opacity: 0;
     animation: fadeIn 1s forwards;
     animation-delay: 0.5s;
-    font-size: 2.2em;
 }
-
 h2 {
-    margin: 5px 0;
+    margin: 10px 0;
     text-align: center;
-    font-weight: 300;
-    color: #b0b0b0;
-    font-size: 1.1em;
-    min-height: 1.2em; /* prevents jump during typing */
+    font-weight: 400;
+    font-size: 1.2em;
+    min-height: 4em;
+    color: #00ff7f;
+    line-height: 1.4em;
 }
 
-/* --- Typewriter effect --- */
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-@keyframes blinkCaret {
-    50% { border-color: transparent; }
-}
-
-.typewriter {
+/* Typewriter effect */
+.typewriter-line {
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid #00cfff;
-    animation: typing 4s steps(80, end), blinkCaret 0.75s step-end infinite;
+    border-right: 2px solid #00ff7f;
+    width: 0;
 }
 
-/* --- Buttons --- */
+/* Buttons */
 a {
     display: block;
     margin: 15px;
@@ -87,8 +77,8 @@ a {
     transition: 0.3s ease;
     opacity: 0;
     animation: fadeIn 1s forwards;
-    background: linear-gradient(135deg, #00cfff, #006eff);
-    box-shadow: 0 4px 10px rgba(0, 207, 255, 0.3);
+    background: linear-gradient(135deg, #00ff7f, #009933);
+    box-shadow: 0 4px 10px rgba(0,255,127,0.3);
 }
 
 a:nth-of-type(1) { animation-delay: 1.5s; }
@@ -98,17 +88,18 @@ a:nth-of-type(4) { animation-delay: 3s; }
 
 a:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 207, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(0,255,127,0.5);
 }
 
-/* --- Fade-in animation --- */
+/* Fade in animation */
 @keyframes fadeIn {
     to { opacity: 1; }
 }
 
-/* --- Responsive --- */
+/* Responsive */
 @media(max-width: 480px){
     h1 { font-size: 1.8em; }
+    h2 { font-size: 1em; }
     a { font-size: 1em; padding: 12px 25px; }
     .profile-pic { width: 140px; height: 140px; }
 }
@@ -116,18 +107,54 @@ a:hover {
 </head>
 <body>
 
-<!-- Profile picture -->
 <img src="profile.jpg" alt="Maureen Okoro" class="profile-pic">
 
-<!-- Intro text -->
 <h1>Hi, I'm Maureen</h1>
-<h2><span class="typewriter">I craft intelligent, deployable solutions from complex data to power better business outcomes</span></h2>
+<h2>
+    <span class="typewriter-line" id="line1"></span><br>
+    <span class="typewriter-line" id="line2"></span><br>
+    <span class="typewriter-line" id="line3"></span>
+</h2>
 
-<!-- Social links -->
 <a href="https://www.linkedin.com/in/maureen-okoro-8a1972245" target="_blank">LinkedIn</a>
 <a href="https://x.com/babywick15?s=21" target="_blank">Twitter</a>
 <a href="https://github.com/mauree155" target="_blank">GitHub</a>
 <a href="https://medium.com/@okoromaureen590" target="_blank">Medium</a>
+
+<script>
+// Multi-line typewriter effect
+const lines = [
+    "I craft intelligent, deployable solutions",
+    "from complex data to power better",
+    "business outcomes"
+];
+
+function typeLine(lineElem, text, delay = 0, callback) {
+    let i = 0;
+    setTimeout(() => {
+        const interval = setInterval(() => {
+            lineElem.textContent += text[i];
+            i++;
+            if (i >= text.length) {
+                clearInterval(interval);
+                if (callback) callback();
+            }
+        }, 50);
+    }, delay);
+}
+
+const lineElems = [
+    document.getElementById("line1"),
+    document.getElementById("line2"),
+    document.getElementById("line3")
+];
+
+typeLine(lineElems[0], lines[0], 500, () => {
+    typeLine(lineElems[1], lines[1], 300, () => {
+        typeLine(lineElems[2], lines[2], 300);
+    });
+});
+</script>
 
 </body>
 </html>
